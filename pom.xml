@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ryan</groupId>
+    <artifactId>ryan-shop</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>ryan-common</module>
+        <module>ryan-coupon</module>
+        <module>ryan-gateway</module>
+        <module>ryan-order</module>
+        <module>ryan-pay</module>
+        <module>ryan-product</module>
+        <module>ryan-user</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- JDK 版本，此处用的是 JDK11，如果你的版本是 JDK 1.8，此处需要改成 1.8 -->
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <!-- 指定 SpringBoot 版本 -->
+        <spring.boot.version>2.6.13</spring.boot.version>
+        <!-- 指定 SpringCloud 版本 -->
+        <spring.cloud.version>2021.0.5</spring.cloud.version>
+        <!-- 指定 SpringCloudAlibaba 版本 -->
+        <alibaba.cloud.version>2021.0.6.0</alibaba.cloud.version>
+        <!-- 指定 MybatisPlus 版本，整合 SpringBoot -->
+        <mybatisplus.boot.starter.version>3.4.0</mybatisplus.boot.starter.version>
+        <!-- 指定 lombok 版本 -->
+        <lombok.version>1.18.36</lombok.version>
+        <!-- 指定公共包版本 -->
+        <commons.lang3.version>3.9</commons.lang3.version>
+        <commons.codec.version>1.15</commons.codec.version>
+        <!-- 指定 swagger 版本 -->
+        <springfox.boot.starter.version>3.0.0</springfox.boot.starter.version>
+        <!-- 指定 docker 打包镜像版本，后续部署用 -->
+        <docker.image.prefix>huazai-ecshop-cloud</docker.image.prefix>
+        <!-- 指定工具包版本 -->
+        <hutool.version>5.8.22</hutool.version>
+        <!-- 指定 fastjson 包版本 -->
+        <fastjson.version>2.0.57</fastjson.version>
+        <!-- 指定 caffeine 包版本-->
+        <caffeine.version>2.8.5</caffeine.version>
+        <!-- 指定 guava 包版本-->
+        <guava.version>33.3.0-jre</guava.version>
+        <!-- 指定 jd-hotkey 包版本-->
+        <hotkey.version>0.0.4-SNAPSHOT</hotkey.version>
+        <!-- 指定 buffer-trigger 包版本-->
+        <buffer.trigger.version>0.2.21</buffer.trigger.version>
+        <!--跳过单元测试，方便本地操作-->
+        <skipTests>true</skipTests>
+        <mapstruct.version>1.4.1.Final</mapstruct.version>
+        <!-- 强制指定 HikariCP 版本 -->
+        <hikaricp.version>6.2.1</hikaricp.version>
+    </properties>
+
+    <!--依赖项版本-->
+    <dependencyManagement>
+        <dependencies>
+            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies/2.3.3.RELEASE -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies/Hoxton.SR8 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-alibaba-dependencies/2.2.1.RELEASE -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${alibaba.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- MybatisPlus 与 springboot 整合 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatisplus.boot.starter.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok/1.18.16 -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <!--scope=provided，表示只在编译阶段生效，不需要打入包中, Lombok 在编译期将带 Lombok 注解的 Java 文件正确编译为完整的 Class 文件-->
+                <!--<scope>provided</scope>-->
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3.version}</version>
+            </dependency>
+            <!-- 用来进行加密使用 https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons.codec.version}</version>
+            </dependency>
+            <!-- swagger 接口文档 -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${springfox.boot.starter.version}</version>
+            </dependency>
+            <!--工具包-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <!-- fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!-- kaptcha 依赖包 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>kaptcha-spring-boot-starter</artifactId>
+                <version>1.1.0</version>
+            </dependency>
+          </dependencies>
+    </dependencyManagement>
+
+    <!-- 加快代码库下载， 这里使用阿里云镜像仓库-->
+    <repositories>
+        <repository>
+            <id>maven-ali</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public//</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <!-- springboot 打包 docker 镜像使用 -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+                <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
+                    <!-- 关键配置：包含系统作用域的依赖 -->
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
