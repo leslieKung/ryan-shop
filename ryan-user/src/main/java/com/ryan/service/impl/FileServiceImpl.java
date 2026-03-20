@@ -39,7 +39,7 @@ public class FileServiceImpl implements FileService {
 
         String originalFilename = file.getOriginalFilename();
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         String folderName = now.format(dateTimeFormatter);
         String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
         String fileName = "user/" + folderName + "/" + CommonUtil.getUuid() + "/" + extension;

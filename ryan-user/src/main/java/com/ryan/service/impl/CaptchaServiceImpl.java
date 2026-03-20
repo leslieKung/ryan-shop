@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  * @Author Ryan
  * @Date 2026/3/6 20:39
  * @Version 1.0.0
- * @Description // TODO:
+ * @Description 验证码服务实现类
  */
 @Service
 @Slf4j
@@ -104,7 +104,7 @@ public class CaptchaServiceImpl implements CaptchaService {
         // 先从缓存中获取验证码 key
         String cacheCheckKey = String.format(CacheKeyConstant.CHECK_CODE_KEY, sendCodes.name(), to);
         String cacheCheckVal = redisTemplate.opsForValue().get(cacheCheckKey);
-        log.info("验证码模块-缓存验证码key：{}, 缓存验证码val：{}", cacheCheckKey, cacheCheckVal);
+//        log.info("验证码模块-缓存验证码key：{}, 缓存验证码val：{}", cacheCheckKey, cacheCheckVal);
 
         /**
          * 如果不为空，则判断是否匹配
@@ -112,7 +112,7 @@ public class CaptchaServiceImpl implements CaptchaService {
         if (StringUtils.isNotBlank(cacheCheckVal)) {
             // 从缓存中取出验证码
             String cacheCheckCode = cacheCheckVal.split("_")[0];
-            log.info("验证码模块-缓存验证码：{}, 提交的邮箱验证码：{}", cacheCheckCode, code);
+//            log.info("验证码模块-缓存验证码：{}, 提交的邮箱验证码：{}", cacheCheckCode, code);
             // 判断缓存中的验证码跟传过来的验证码是否匹配，如果匹配成功则删除对应的缓存
             if (cacheCheckCode.equals(code)) {
                 // 删除验证码

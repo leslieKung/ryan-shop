@@ -1,7 +1,7 @@
 package com.ryan.service;
 
-import com.ryan.model.UserDO;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.ryan.entity.UserRegisterEntity;
+import com.ryan.utils.ApiResult;
 
 /**
  * <p>
@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author Ryan
  * @since 2026-03-04
  */
-public interface UserService extends IService<UserDO> {
+public interface UserService {
 
+    ApiResult register(UserRegisterEntity registerEntity);
 }

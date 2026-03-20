@@ -2,6 +2,7 @@ package com.ryan.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.ryan.entity.UserRegisterEntity;
 import com.ryan.enums.BizCodes;
 import com.ryan.service.FileService;
 import com.ryan.service.impl.UserServiceImpl;
@@ -12,6 +13,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,7 +45,19 @@ public class UserController {
         return ApiResult.doSuccess(JSONObject.parseObject(userInfo));
     }
 
+    @ApiOperation("注册用户信息")
+    @PostMapping("/register")
+    public ApiResult register(@ApiParam(value = "用户注册信息", required = true) @RequestBody UserRegisterEntity registerEntity) {
+        return userService.register(registerEntity);
+    }
 
+
+    /**
+     * 用户头像上传 默认大小为1M，超过1M则上传失败
+     *
+     * @param file
+     * @return
+     */
     @ApiOperation("用户头像上传")
     @PostMapping("/upload")
     public ApiResult userDetail(@ApiParam(value = "文件上传", required = true) @RequestPart("file") MultipartFile file) {
